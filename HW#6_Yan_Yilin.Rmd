@@ -1,0 +1,110 @@
+---
+title: "1129 HW6-R__Yan Yilin"
+output: html_notebook
+---
+
+Question 1: Use R to create the following two matrices and do the indicated matrix multiplication.
+What is the resulting matrix? (4 points)
+```{r}
+# Create the two required matrices
+Q1MatrixA <- matrix(c(7,2,9,4,12,13), nrow = 2, ncol = 3)
+Q1MatrixB <- matrix(c(1,2,3,7,8,9,12,13,14,19,20,21), nrow = 3, ncol = 4)
+
+# Print the matrices
+Q1MatrixA
+Q1MatrixB
+```
+```{r}
+# Do the indicated matrix multiplication
+Q1Result = Q1MatrixA %*% Q1MatrixB
+Q1Result
+```
+The resulting matrix is shown above.
+
+Question 2: (total 13 points)
+a. Create a data frame like the following table (2 points).
+```{r}
+# Create a data frame
+Data_Frame <- data.frame (
+  id = c(1,2,3,4,5),
+  name = c("Peter", "Amy", "Ryan","Gary","Michelle"),
+  salary = c(623.3, 515.2, 611.00,729.00, 843.25)
+)
+
+# Print the data frame
+Data_Frame
+```
+b. Then add a column of “department”, and assign department names for the 5 persons, for example, IT, finance, computer science, etc., name your own. (2 points).
+```{r}
+# Add the "department" column
+New_col_DF <- cbind(Data_Frame, department = c("IT","Finance","Accounting","Computer Science","Public Relation"))
+
+#Print the new column
+New_col_DF
+```
+c. Extract 1st, 3rd, and 5th rows, with 2nd and 3rd columns, using c function. (3 points).
+```{r}
+Extract_result = New_col_DF[c(1,3,5),c(2,3)]
+Extract_result
+```
+d. plot a bar chart to show the salary of row 1,4,5 and label the bar with people’s name correspondingly. (3 points).
+```{r}
+# x-axis values: people's name
+x <- New_col_DF[c(1,4,5),c(2)]
+
+# y-axis values: salary
+y <- New_col_DF[c(1,4,5),c(3)]
+
+barplot(y, names.arg = x)
+```
+e. plot a pie chart, based on this data framework, only showing the highest salary, lowest salary, and median salary, give your plot a title, and label each pie. (3 points).
+```{r}
+H_S <- max(New_col_DF$salary)
+H_L <- min(New_col_DF$salary)
+H_M <- median(New_col_DF$salary)
+H_S
+H_L
+H_M
+
+# Create a vector of labels
+mylabel <- c("Highest Salary", "Lowest Salary", "Median Salary")
+
+# Create a vector of colors
+colors <- c("palegreen", "paleturquoise", "papayawhip")
+
+x <- c(H_S,H_L,H_M)
+
+# Display the pie chart with colors
+pie(x, label = mylabel, main = "Salary Pie Chart", col = colors)
+
+# Display the explanation box
+legend("bottomleft", mylabel, fill = colors)
+```
+Question 3: Pick two functions in your final project, transfer that into R programming. One function should involve “if else” (4 points), the other function should involve “for loop or while loop” (4 points). 
+•	Test your function, showing your function works. You can assign some values, in order to test the function. 
+•	This is individual homework, so you and your team member may pick the same functions but could have different translations. 
+•	Note, in your homework submission, paste your python code with your R code for comparison. 
+1) Transfer one "if else" function:
+```{r}
+# Note that by the previous assumptions and settings, ai_win and player_win won't be >2. ai_win or player_win can only be 0,1,2
+# So the value assigned here (for the testing purpose) should be numbers from 0,1,2
+ai_win = 2
+player_win = 1
+
+if (ai_win == 2) {
+  print("You LOSE the game since ai has already won 2 rounds.")
+} else{
+    print("You've won 2 rounds, You WIN the game, Congratulation!!!")
+  }
+```
+2) Transfer one "while loop" function:
+```{r}
+# by previous setting: replay = input("Play again? (yes/no)")
+replay = "noo"
+
+while (replay != "yes" && replay != "no"){
+  print("The input is not valid, it should be one of 'yes' or 'no', please retype.")
+  replay <- readline(prompt ="Play again? (yes/no)" )
+}
+```
+
